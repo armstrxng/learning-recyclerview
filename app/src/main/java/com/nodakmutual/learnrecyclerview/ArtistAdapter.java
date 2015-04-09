@@ -4,28 +4,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Sam Stutsman on March, 2015.
- */
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
 
-    List<Contact> contacts;
+public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> {
 
-    // Constructor class creates the adapter and passses in what we will need from our Fragment
-    public ContactAdapter(List<Contact> contacts) {
-        this.contacts = contacts;
+    List<ArtistInfo> artists;
+
+    // Constructor class creates the adapter and passes in what we will need from our Fragment
+    public ArtistAdapter(List<ArtistInfo> artists) {
+        this.artists = artists;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // This line inflates the layout which will be repeated
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_contact, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_artist, parent, false);
 
         // We create an instance of our ViewHolder so we can handle click events.
         ViewHolder viewHolder = new ViewHolder(view, new ViewHolder.ItemClickListener() {
@@ -41,14 +38,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     @Override
     // This method assigns the values from the contacts list we passed in to the views
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.tvName.setText(contacts.get(position).getName());
-        holder.tvAddress.setText(contacts.get(position).getAddress());
+        holder.tvArtistName.setText(artists.get(position).getArtistName());
+        holder.tvSongTitle.setText(artists.get(position).getSongTitle());
+        holder.ivAlbumArt.setImageResource(artists.get(position).getImage());
     }
 
     @Override
     // This simple method is needed for the RecyclerView.
     public int getItemCount() {
-        return contacts.size();
+        return artists.size();
     }
 
     // This is our ViewHolder inner class. Very important!
@@ -56,19 +54,31 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
         ItemClickListener listener;
 
-        TextView tvName;
-        TextView tvAddress;
+        TextView tvArtistName;
+        TextView tvSongTitle;
+        TextView tvTrackCount;
+        TextView tvYear;
+        TextView tvPublisher;
+        ImageView ivAlbumArt;
 
 
         // We map our views, and assign listeners in the ViewHolder constructor
         public ViewHolder(View itemView, ItemClickListener listener) {
             super(itemView);
             this.listener = listener;
-            tvName = (TextView) itemView.findViewById(R.id.tv_name);
-            tvAddress = (TextView) itemView.findViewById(R.id.tv_address);
+            tvArtistName = (TextView) itemView.findViewById(R.id.tv_artistName);
+            tvSongTitle = (TextView) itemView.findViewById(R.id.tv_songTitle);
+            tvTrackCount = (TextView) itemView.findViewById(R.id.tv_trackCount);
+            tvYear = (TextView) itemView.findViewById(R.id.tv_year);
+            tvPublisher = (TextView) itemView.findViewById(R.id.tv_publisher);
+            ivAlbumArt = (ImageView) itemView.findViewById(R.id.iv_albumArt);
 
-            tvName.setOnClickListener(this);
-            tvAddress.setOnClickListener(this);
+            tvArtistName.setOnClickListener(this);
+            tvSongTitle.setOnClickListener(this);
+            tvTrackCount.setOnClickListener(this);
+            tvYear.setOnClickListener(this);
+            tvPublisher.setOnClickListener(this);
+            ivAlbumArt.setOnClickListener(this);
         }
 
         // This method is just to pass on the onClick event to our individual items! Neat!

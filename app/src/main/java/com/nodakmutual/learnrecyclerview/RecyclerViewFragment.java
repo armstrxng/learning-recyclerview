@@ -15,7 +15,7 @@ import java.util.List;
 
 public class RecyclerViewFragment extends Fragment {
 
-    private RecyclerView recyclerContacts;
+    private RecyclerView recyclerArtists;
 
     public RecyclerViewFragment() {
     }
@@ -32,26 +32,33 @@ public class RecyclerViewFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Map our view
-        recyclerContacts = (RecyclerView) view.findViewById(R.id.recycler_contacts);
+        recyclerArtists = (RecyclerView) view.findViewById(R.id.recycler_artists);
 
         // Every RecyclerView needs a LayoutManager. Notice that it's an inner class.
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         // Don't forget to set the manager on your RecyclerView!
-        recyclerContacts.setLayoutManager(layoutManager);
+        recyclerArtists.setLayoutManager(layoutManager);
 
-        List<Contact> contacts = mockContacts();
+        List<ArtistInfo> artists = artistList();
+
+        recyclerArtists.setAdapter(new ArtistAdapter(artists));
 
     }
 
-    private List<Contact> mockContacts() {
+    private List<ArtistInfo> artistList() {
         // Creates a list of Contacts and fills them up with data
-        List<Contact> contacts = new ArrayList<>();
-        contacts.add(new Contact("Sam", "Front of the class"));
-        contacts.add(new Contact("Sam", "Front of the class"));
-        contacts.add(new Contact("Susie", "Back of the class"));
-        contacts.add(new Contact("Susie", "Back of the class"));
-        contacts.add(new Contact("Bernice", "Not even in this class"));
+        List<ArtistInfo> artists = new ArrayList<>();
+        artists.add(new ArtistInfo(R.drawable.ghostsep, "Crywolf", "Swimming in the Flood", "6", "2013", "Always Never Records"));
+        artists.add(new ArtistInfo(R.drawable.krewella, "Krewella", "Human", "14", "2013", "Columbia Records"));
+        artists.add(new ArtistInfo(R.drawable.vicetone,"Vicetone", "Heartbeat", "Single", "2013", "Monstercat"));
+        artists.add(new ArtistInfo(R.drawable.smallpools, "Smallpools", "Dreaming", "Single", "2013", "RCA"));
+        artists.add(new ArtistInfo(R.drawable.iconapop, "Icona Pop", "All Night", "11", "2013", "Ten/Atlantic Records"));
+        artists.add(new ArtistInfo(R.drawable.tristam, "Tristam", "I Remember", "Single", "2012", "Monstercat"));
+        artists.add(new ArtistInfo(R.drawable.mitis, "MitiS", "Born(Vocal Mix)", "6", "2013", "INTO THE AM Records"));
+        artists.add(new ArtistInfo(R.drawable.sevenlions, "Seven Lions", "Days to Come", "6", "2013", "OWSLA"));
+        artists.add(new ArtistInfo(R.drawable.tristamandbrakken, "Tristam & Brakken", "Frame of Mind", "Single", "2014", "Monstercat"));
+        artists.add(new ArtistInfo(R.drawable.m83, "M83", "Midnight City", "22", "2011", "Naive Records/Mute Records" ));
 
-        return contacts;
+        return artists;
     }
 }
